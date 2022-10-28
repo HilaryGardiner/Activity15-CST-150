@@ -1,0 +1,106 @@
+namespace Activity15App
+{
+    public partial class Form1 : Form
+    {
+        int maximunDay;
+        static int luckyNumber;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        public int getLuckyNumber()
+        {
+            return luckyNumber;
+        }
+        public void birthDay()
+        {
+            maximunDay = 0;
+            if (birthMonthComboBox2.SelectedIndex == 0 || birthMonthComboBox2.SelectedIndex == 2 || birthMonthComboBox2.SelectedIndex == 4 || birthMonthComboBox2.SelectedIndex == 6 || birthMonthComboBox2.SelectedIndex == 7 || birthMonthComboBox2.SelectedIndex == 9 || birthMonthComboBox2.SelectedIndex == 11)
+            {
+                maximunDay = 31;
+            }
+            else if (birthMonthComboBox2.SelectedIndex == 1)
+            {
+                int year = Int32.Parse(birthYearComboBox1.Text);
+                // If a year is multiple of 400,
+                // then it is a leap year
+                if (year % 400 == 0)
+                    maximunDay = 29;
+                // Else If a year is muliplt of 100,
+                // then it is not a leap year
+                if (year % 100 == 0)
+                    maximunDay = 28;
+                // Else If a year is muliplt of 4,
+                // then it is a leap year
+                if (year % 4 == 0)
+                    maximunDay = 29;
+                else
+                    maximunDay = 28;
+            }
+            else
+                maximunDay = 30;
+
+            if (birthMonthComboBox2.SelectedIndex != -1)
+            {
+                birthDayComboBox3.Items.Clear();
+                for (int i = 0; i < maximunDay; i++)
+                {
+                    birthDayComboBox3.Items.Add(i + 1);
+                }
+                birthDayComboBox3.Text = maximunDay.ToString();
+            }
+        }
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            birthDay();
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //Creating and setting the properties of combobox
+
+            //birthYearComboBox1.Text = "2004";
+            //ComboBox mybox = new ComboBox();
+            //mybox.Location
+            //birthYearComboBox1.Items.Add(1980);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            birthDay();
+
+        }
+
+
+
+        private void getLuckyNumberButton1_Click(object sender, EventArgs e)
+        {
+            //If selections are made in the comboboxes 
+            if (birthYearComboBox1.SelectedIndex != -1 && birthMonthComboBox2.SelectedIndex != -1 && birthDayComboBox3.SelectedIndex != -1 && favoriteColorComboBox4.SelectedIndex != -1)
+            {
+                //calculation lucky number
+                luckyNumber = (birthYearComboBox1.SelectedIndex + birthMonthComboBox2.SelectedIndex + birthDayComboBox3.SelectedIndex + favoriteColorComboBox4.SelectedIndex);
+                //hide form 1
+                this.Hide();
+                //Create an instance of form2
+                Form2 frm2 = new Form2();
+                frm2.ShowDialog(); //It gonna halt/freeze the execution of click event
+                //dispose form2 instance
+                frm2 = null;
+                //show form1 again
+                this.Close();
+
+                //frm2.Show();
+                
+
+            }
+            else
+            {
+                MessageBox.Show("Please select an item in each box above."); // Tells the user to make a selection in each combobox
+            }
+        }
+    }
+
+}
+    

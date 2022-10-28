@@ -1,0 +1,28 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Reflection.Emit;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Activity15App
+{
+    public partial class Form2 : Form
+    {
+        public Form2()
+        {
+            InitializeComponent();
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            Form1 frm = new Form1(); // creates an object
+
+            luckyNumberOutputLabel2.Text = frm.getLuckyNumber().ToString(); //gets lucky number, converts to string, and assigns it to luckyNumberOutputlabel2
+        }
+    }
+}
